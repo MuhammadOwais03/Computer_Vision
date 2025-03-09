@@ -26,6 +26,15 @@ while True:
 
     if results.multi_hand_landmarks:
         for handlems in results.multi_hand_landmarks:
+
+            for id, lm in enumerate(handlems.landmark):
+                height, weight, channnels = img.shape
+                cx, cy = int(lm.x*weight), int(lm.y*height) ## Covert decimals into pixels
+                print(id, cx, cy)
+
+                if id == 0:
+                    cv.circle(img, (cx, cy), 15, (255, 0, 255), cv.FILLED)
+
             mpDraws.draw_landmarks(img, handlems, mpHands.HAND_CONNECTIONS)
 
 
